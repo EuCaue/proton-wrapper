@@ -1,26 +1,20 @@
-import './style.css'
-import viteLogo from '/logo.svg'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
+import "./style.css";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+window.addEventListener("DOMContentLoaded", () => {
+  const btnCalendar: HTMLInputElement | null =
+    document.querySelector("#btn-calendar");
+  const btnEmail: HTMLElement | null = document.querySelector("#btn-email");
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+  if (btnCalendar && btnEmail) {
 
-postMessage({ payload: 'removeLoading' }, '*')
+    btnCalendar.addEventListener("click", () => {
+      window?.electronAPI.handleChangeProtonApp("calendar");
+      console.log("hello from btnCalendar");
+    });
+
+    btnEmail.addEventListener("click", () => {
+      window?.electronAPI.handleChangeProtonApp("email");
+      console.log("hello from btnEmail");
+    });
+  }
+});
